@@ -1,0 +1,6 @@
+package ApiTesting.com.org.additionalClasses;
+
+public class Posts {
+
+	private Users user;
+}

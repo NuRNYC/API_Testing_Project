@@ -1,0 +1,13 @@
+package ApiTesting.com.org.api;
+
+//import org.testng.*;
+import org.testng.annotations.Test;
+import static com.jayway.restassured.RestAssured.*;
+public class AppTest{
+	
+	@Test
+	public void test_01() {
+		get("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/");
+		
+	}
+}

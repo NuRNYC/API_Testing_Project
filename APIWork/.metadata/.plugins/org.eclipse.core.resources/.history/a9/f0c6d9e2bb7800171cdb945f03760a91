@@ -1,0 +1,18 @@
+package ApiTesting.com.org.api;
+
+//import org.testng.*;
+import org.testng.annotations.Test;
+
+import com.jayway.restassured.response.Response;
+
+import static com.jayway.restassured.RestAssured.*;
+public class AppTest{
+	
+	@Test
+	public void test_01() {
+		Response reps =when().
+						get("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/");
+		//Object resp;
+		System.out.println(reps.getStatusCode());
+	}
+}

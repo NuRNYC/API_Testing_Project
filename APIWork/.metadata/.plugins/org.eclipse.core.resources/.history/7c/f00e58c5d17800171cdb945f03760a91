@@ -1,0 +1,84 @@
+package ApiTesting.com.org.api;
+import org.testng.annotations.Test;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
+
+import ApiTesting.com.org.additionalClasses.*;
+
+import static com.jayway.restassured.RestAssured.*;
+public class AppTest{
+
+	//Simple GET Request
+	//@Test
+	public void test_01() {
+		Response reps =given().
+				parameter("id","111").
+				when().
+				get("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/posts");
+		System.out.println(reps.asString());
+	}
+
+
+
+	//Simple POST Request
+	//@Test
+	public void test_02() {
+		Response resp=given().
+				body("{	\"userID\": 3,"
+						+ "\"title\":\"post by NUR\","
+						+ "\"body\":\"Body of post by NUR\"}").
+				when().
+				contentType(ContentType.JSON).
+				post("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/posts");
+
+		System.out.println("POST Request result: "+resp.asString());
+	}
+
+
+	//PUT Request
+	//@Test
+	public void test_03() {
+		Response resp=given().
+				when().
+				contentType(ContentType.JSON).
+				body("{	\"userID\": 3,"
+						+ "\"title\":\"post by NUR\","
+						+ "\"body\":\"Body of post by NUR uses put request\"}").
+				put("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/posts/111");
+
+		System.out.println("PUT request result: " +resp.asString());
+	}
+
+	//DELETE Request
+	//@Test
+	public void test_04() {
+		Response resp=given().
+				when().
+				delete("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/posts/111");
+
+		System.out.println("Deleting "+ resp.asString());
+	}
+
+	//POST request to USER resource
+	@Test
+	public void test_05() {
+		Users users1= new Users();
+		Posts post1= new Posts();
+		Geo geo1=new Geo();
+		Company company1=new Company();
+		Address address1=new Address();
+		
+		
+		address1.setStree("Add Lane");
+		address1.setSuite("2141");
+		address1.setCity("Alpharetta");
+		address1.setZipcode("30005");
+		
+		Response resp=given().
+				when().
+				delete("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/posts/111");
+
+		System.out.println("Deleting "+ resp.asString());
+	}
+
+}
