@@ -2,15 +2,15 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="2031" started-at="2017-08-04T05:50:51Z" finished-at="2017-08-04T05:50:53Z">
+  <suite name="Default suite" duration-ms="2180" started-at="2017-08-09T04:04:27Z" finished-at="2017-08-09T04:04:29Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="2031" started-at="2017-08-04T05:50:51Z" finished-at="2017-08-04T05:50:53Z">
+    <test name="Default test" duration-ms="2180" started-at="2017-08-09T04:04:27Z" finished-at="2017-08-09T04:04:29Z">
       <class name="ApiTesting.com.org.api.AppTest">
-        <test-method status="PASS" signature="test_06()[pri:0, instance:ApiTesting.com.org.api.AppTest@cb5822]" name="test_06" duration-ms="2001" started-at="2017-08-04T01:50:51Z" finished-at="2017-08-04T01:50:53Z">
+        <test-method status="PASS" signature="test_09()[pri:0, instance:ApiTesting.com.org.api.AppTest@cb5822]" name="test_09" duration-ms="2150" started-at="2017-08-09T00:04:27Z" finished-at="2017-08-09T00:04:29Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test_06 -->
+        </test-method> <!-- test_09 -->
       </class> <!-- ApiTesting.com.org.api.AppTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

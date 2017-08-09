@@ -1,12 +1,17 @@
 package ApiTesting.com.org.api;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+//import com.jayway.jsonpath.JsonPath;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
-
 import ApiTesting.com.org.additionalClasses.*;
-
+//import static org.testng.Assert.assertEquals;
+import org.apache.http.HttpStatus;
+import static org.hamcrest.Matchers.*;
 import static com.jayway.restassured.RestAssured.*;
 public class AppTest{
+
+	String givenEndPoint="http://ec2-54-174-213-136.compute-1.amazonaws.com:3000";
 
 	//Simple GET Request to Posts
 	//@Test
@@ -17,7 +22,7 @@ public class AppTest{
 				get("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/posts");
 		System.out.println(reps.asString());
 	}
-	
+
 	//Simple POST Request
 	//@Test
 	public void test_02() {
@@ -65,24 +70,24 @@ public class AppTest{
 		Geo geo1=new Geo();
 		Company company1=new Company();
 		Address address1=new Address();
-		
-		
+
+
 		address1.setStree("Add Lane");
 		address1.setSuite("2141");
 		address1.setCity("Alpharetta");
 		address1.setZipcode("30005");
-		
+
 		company1.setName("Test Company Name");
 		company1.setCatchPhrase("Test Company Catch Phrase");
 		company1.setBs("TEST TEST TEST BS BS BS BS BS BS BS");
-		
-		
+
+
 		geo1.setLat("-38.2386");
 		geo1.setLng("57.2232");
-		
-		
-		
-		
+
+
+
+
 		users1.setName("Test NAME");
 		users1.setUsername("TUser");
 		users1.setEmail("TestEmail@email.com");
@@ -91,9 +96,9 @@ public class AppTest{
 		users1.setPhone("99999999");
 		users1.setWebsite("www.testwebsite.org");
 		users1.setCompany(company1);
-		
+
 		post1.setUser(users1);
-		
+
 		Response resp=given().
 				when().
 				contentType(ContentType.JSON).
@@ -102,12 +107,12 @@ public class AppTest{
 
 		System.out.println("Response - POST request to USERS: "+ resp.asString());
 	}
-	
+
 	//POST for Comments Resource
-	@Test
+	//@Test
 	public void test_06() {
 		Comments comments =new Comments();
-		
+
 		comments.setPostId("11");
 		comments.setName("Test Comments Name");
 		comments.setEmail("test@comments.com");
@@ -120,6 +125,81 @@ public class AppTest{
 
 		System.out.println("Response : - POST request to COMMENTS: "+ resp.asString());
 	}
-	
+
+	/**
+	 * Test 07 perform the get method and validate the status code using Assert
+	 * **/
+	//@Test
+	public void test_07() {
+		/**
+		 * Given Accept the content as JSON format
+		 * When i perform the GET method 
+		 * Then the response should have status code 200
+		 * 
+		 * **/
+
+		int code=given()
+				.accept(ContentType.JSON)
+				.when()
+				.get("http://ec2-54-174-213-136.compute-1.amazonaws.com:3000/posts")
+				.thenReturn()
+				.statusCode();
+
+		System.out.println("Status CODE :"+code);
+		Assert.assertEquals(HttpStatus.SC_OK, code);
+
+	}
+
+	/**
+	 * Test 08 perform the get method and validate the content of given id
+	 * **/
+	//@Test
+	public void test_08() {
+		/**
+		 * Given Accept the content as JSON format
+		 * When i perform the GET method with ID  113
+		 * Then the response should have "title": "post by NUR"
+		 * 
+		 * **/
+
+		given()
+		.accept(ContentType.JSON)
+		.when()
+		.get(givenEndPoint+"/posts/113")
+		.then()
+		.body("title", equalToIgnoringCase("post by NUR"));
+
+
+
+	}
+
+	/**
+	 * Test 09 perform the get method and validate the content of given id
+	 * used Assert
+	 * **/
+	@Test
+	public void test_09() {
+		/**
+		 * Given Accept the content as JSON format
+		 * When i perform the GET method with ID  113
+		 * Then the response should have "title": "post by NUR"
+		 * 
+		 * **/
+		String expectedValue="post by NUR";
+		
+		String actualValue= given()
+						.when()
+						.get(givenEndPoint+"/posts/113")
+						.then()
+						.contentType(ContentType.JSON)
+						.extract()
+						.path("title");
+						
+		
+			System.out.println("Actual Value is "+actualValue);
+			
+			Assert.assertTrue(actualValue.equalsIgnoreCase(expectedValue));
+			
+	}
 
 }

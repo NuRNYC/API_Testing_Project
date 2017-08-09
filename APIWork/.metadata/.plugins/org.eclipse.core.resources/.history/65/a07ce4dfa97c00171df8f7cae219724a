@@ -1,0 +1,7 @@
+package ApiTesting.com.org.additionalClasses;
+
+public class Base {
+	@BeforeClass
+	
+
+}

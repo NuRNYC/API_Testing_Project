@@ -4,4 +4,6 @@
 <fullyQualifiedTypeName name="com.jayway.restassured.RestAssured"/>
 <fullyQualifiedTypeName name="com.jayway.restassured.response.Response"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="ApiTesting.com.org.additionalClasses.Users"/>
+<fullyQualifiedTypeName name="com.jayway.restassured.http.ContentType"/>
 </qualifiedTypeNameHistroy>
